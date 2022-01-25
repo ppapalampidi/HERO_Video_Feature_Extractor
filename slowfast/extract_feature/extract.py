@@ -51,7 +51,7 @@ def parse_args():
         '--num_decoding_thread', type=int, default=0,
         help='Num parallel thread for video decoding')
     parser.add_argument(
-        '--target_framerate', type=int, default=30,
+        '--target_framerate', type=int, default=10,
         help='decoding frame per second')
     parser.add_argument(
         '--clip_len', type=str, default='3/2',
