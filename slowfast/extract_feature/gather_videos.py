@@ -32,7 +32,7 @@ def main(opts):
 
         for input_filename in fileList:
             if ',' in input_filename:
-                print(input_filename)
+                input_filename = input_filename.replace(',',' ')
             filename = os.path.basename(input_filename)
             fileId, _ = os.path.splitext(filename)
 
