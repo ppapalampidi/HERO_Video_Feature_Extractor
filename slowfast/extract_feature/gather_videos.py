@@ -1,0 +1,57 @@
+import os
+import argparse
+import json
+import glob
+COMMON_VIDEO_ETX = set([
+    ".webm", ".mpg", ".mpeg", ".mpv", ".ogg",
+    ".mp4", ".m4p", ".mpv", ".avi", ".wmv", ".qt",
+    ".mov", ".flv", ".swf"])
+
+
+def main(opts):
+    videopath = opts.video_path
+    feature_path = opts.feature_path
+    csv_folder = opts.csv_folder
+    if not os.path.exists(csv_folder):
+        os.mkdir(csv_folder)
+    if not os.path.exists(feature_path):
+        os.mkdir(feature_path)
+
+    outputFile = f"{csv_folder}/slowfast_info.csv"
+    with open(outputFile, "w") as fw:
+        fw.write("video_path,feature_path\n")
+        fileList = []
+
+        movies = [x[0] for x in os.walk(videopath)][1:]
+
+        for movie in movies:
+            print(movie)
+            movie_scenes = [x[0] for x in os.walk(movie)][1:]
+            print(movie_scenes)
+            for movie_scene in movie_scenes:
+                segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
+                print(segs_list)
+                fileList.extend(segs_list)
+            break
+
+        for input_filename in fileList:
+            filename = os.path.basename(input_filename)
+            fileId, _ = os.path.splitext(filename)
+
+            output_filename = os.path.join(
+                feature_path, fileId+".npz")
+            if not os.path.exists(output_filename):
+                fw.write(input_filename+","+output_filename+"\n")
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--video_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_video_shots/", type=str,
+                        help="The input video path.")
+    parser.add_argument("--feature_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_updated_video_features/slowfast_features/",
+                        type=str, help="output feature path.")
+    parser.add_argument(
+        '--csv_folder', type=str, default="/home/s1837267/code/HERO_Video_Feature_Extractor/",
+        help='output csv folder')
+    args = parser.parse_args()
+    main(args)
