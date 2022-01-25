@@ -32,6 +32,8 @@ def main(opts):
                 fileList.extend(segs_list)
 
         for input_filename in fileList:
+            if ',' in input_filename:
+                print(input_filename)
             filename = os.path.basename(input_filename)
             fileId, _ = os.path.splitext(filename)
 
