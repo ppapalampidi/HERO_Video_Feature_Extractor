@@ -14,8 +14,8 @@ def main(opts):
     csv_folder = opts.csv_folder
     if not os.path.exists(csv_folder):
         os.mkdir(csv_folder)
-    if not os.path.exists(feature_path):
-        os.mkdir(feature_path)
+    # if not os.path.exists(feature_path):
+    #     os.mkdir(feature_path)
 
     outputFile = f"{csv_folder}/slowfast_info.csv"
     with open(outputFile, "w") as fw:
