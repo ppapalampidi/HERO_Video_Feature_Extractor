@@ -25,14 +25,11 @@ def main(opts):
         movies = [x[0] for x in os.walk(videopath)][1:]
 
         for movie in movies:
-            print(movie)
             movie_scenes = [x[0] for x in os.walk(movie)][1:]
-            print(movie_scenes)
             for movie_scene in movie_scenes:
                 segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
                 print(segs_list)
                 fileList.extend(segs_list)
-            break
 
         for input_filename in fileList:
             filename = os.path.basename(input_filename)
