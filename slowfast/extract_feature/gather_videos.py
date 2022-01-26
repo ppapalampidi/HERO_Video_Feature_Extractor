@@ -17,7 +17,7 @@ def main(opts):
     # if not os.path.exists(feature_path):
     #     os.mkdir(feature_path)
 
-    outputFile = f"{csv_folder}/slowfast_info.csv"
+    outputFile = f"{csv_folder}/slowfast_info_testset.csv"
     with open(outputFile, "w") as fw:
         fw.write("video_path,feature_path\n")
         fileList = []
@@ -25,10 +25,13 @@ def main(opts):
         movies = [x[0] for x in os.walk(videopath)][1:]
 
         for movie in movies:
-            movie_scenes = [x[0] for x in os.walk(movie)][1:]
-            for movie_scene in movie_scenes:
-                segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
-                fileList.extend(segs_list)
+            # movie_scenes = [x[0] for x in os.walk(movie)][1:]
+            # for movie_scene in movie_scenes:
+            #     segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
+            #     fileList.extend(segs_list)
+            segs_list = sorted(
+                glob.glob(os.path.join(movie, '*.mp4')))
+            fileList.extend(segs_list)
 
         for input_filename in fileList:
             if ',' in input_filename:
@@ -44,9 +47,9 @@ def main(opts):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--video_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_video_shots/", type=str,
+    parser.add_argument("--video_path", default="/home/s1837267/new_organised_movie_data/TESTSET_shots/", type=str,
                         help="The input video path.")
-    parser.add_argument("--feature_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_updated_video_features/slowfast_features/",
+    parser.add_argument("--feature_path", default="/home/s1837267/new_organised_movie_data/TESTSET_updated_video_features/slowfast_features/",
                         type=str, help="output feature path.")
     parser.add_argument(
         '--csv_folder', type=str, default="/home/s1837267/code/HERO_Video_Feature_Extractor/",
