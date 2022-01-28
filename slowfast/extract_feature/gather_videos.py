@@ -17,7 +17,7 @@ def main(opts):
     # if not os.path.exists(feature_path):
     #     os.mkdir(feature_path)
 
-    outputFile = f"{csv_folder}/slowfast_info_testset.csv"
+    outputFile = f"{csv_folder}/clip_info_testset.csv"
     with open(outputFile, "w") as fw:
         fw.write("video_path,feature_path\n")
         fileList = []
