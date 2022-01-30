@@ -17,7 +17,7 @@ def main(opts):
     # if not os.path.exists(feature_path):
     #     os.mkdir(feature_path)
 
-    outputFile = f"{csv_folder}/clip_info.csv"
+    outputFile = f"{csv_folder}/resnet_info.csv"
     with open(outputFile, "w") as fw:
         fw.write("video_path,feature_path\n")
         fileList = []
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--video_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_video_shots/", type=str,
                         help="The input video path.")
-    parser.add_argument("--feature_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_updated_video_features/clip_features/",
+    parser.add_argument("--feature_path", default="/home/s1837267/new_organised_movie_data/TRIPOD_updated_video_features/resnet_features/",
                         type=str, help="output feature path.")
     parser.add_argument(
         '--csv_folder', type=str, default="/home/s1837267/code/HERO_Video_Feature_Extractor/",
