@@ -47,9 +47,9 @@ def main(opts):
         print(video_name)
         feature_path_now = os.path.join(feature_path, video_name)
 
-        if not os.path.exists(feature_path_now):
-            os.mkdir(feature_path_now)
-
+        # if not os.path.exists(feature_path_now):
+        #     os.mkdir(feature_path_now)
+        print(feature_path_now)
         for input_filename in fileList:
             # if ',' in input_filename:
                 # input_filename = input_filename.replace(',',' ')
