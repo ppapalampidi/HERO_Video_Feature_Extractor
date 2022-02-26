@@ -22,7 +22,17 @@ def main(opts):
         fw.write("video_path,feature_path\n")
         fileList = []
 
-        movies = [x[0] for x in os.walk(videopath)][1:]
+        movies = []
+        cnt = 0
+        for x in os.walk(videopath):
+            cnt += 1
+            if cnt == 1:
+                continue
+            movies.append(x[0])
+            if cnt > 3:
+                break
+
+        # movies = [x[0] for x in os.walk(videopath)][1:]
 
         for movie in movies:
             # movie_scenes = [x[0] for x in os.walk(movie)][1:]
