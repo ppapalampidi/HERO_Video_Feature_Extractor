@@ -41,23 +41,27 @@ def main(opts):
             #     fileList.extend(segs_list)
             segs_list = sorted(
                 glob.glob(os.path.join(movie, '*.mp4')))
-            fileList.extend(segs_list)
+            # fileList.extend(segs_list)
 
-        video_name = movie.split('/')[-1]
-        feature_path_now = os.path.join(feature_path, video_name)
+            fileList = segs_list
+            if fileList == []:
+                continue
 
-        # if not os.path.exists(feature_path_now):
-        #     os.mkdir(feature_path_now)
-        for input_filename in fileList:
-            # if ',' in input_filename:
-                # input_filename = input_filename.replace(',',' ')
-            filename = os.path.basename(input_filename)
-            fileId, _ = os.path.splitext(filename)
+            video_name = movie.split('/')[-1]
+            feature_path_now = os.path.join(feature_path, video_name)
 
-            output_filename = os.path.join(
-                feature_path_now, fileId+".npz")
-            if not os.path.exists(output_filename):
-                fw.write(input_filename+","+output_filename+"\n")
+            # if not os.path.exists(feature_path_now):
+            #     os.mkdir(feature_path_now)
+            for input_filename in fileList:
+                # if ',' in input_filename:
+                    # input_filename = input_filename.replace(',',' ')
+                filename = os.path.basename(input_filename)
+                fileId, _ = os.path.splitext(filename)
+
+                output_filename = os.path.join(
+                    feature_path_now, fileId+".npz")
+                if not os.path.exists(output_filename):
+                    fw.write(input_filename+","+output_filename+"\n")
 
 
 if __name__ == '__main__':
