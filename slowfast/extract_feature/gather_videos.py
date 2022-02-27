@@ -29,8 +29,8 @@ def main(opts):
             if cnt == 1:
                 continue
             movies.append(x[0])
-            if cnt > 3:
-                break
+            # if cnt > 3:
+            #     break
 
         # movies = [x[0] for x in os.walk(videopath)][1:]
 
@@ -42,14 +42,12 @@ def main(opts):
             segs_list = sorted(
                 glob.glob(os.path.join(movie, '*.mp4')))
             fileList.extend(segs_list)
-            break
+
         video_name = movie.split('/')[-1]
-        print(video_name)
         feature_path_now = os.path.join(feature_path, video_name)
 
         # if not os.path.exists(feature_path_now):
         #     os.mkdir(feature_path_now)
-        print(feature_path_now)
         for input_filename in fileList:
             # if ',' in input_filename:
                 # input_filename = input_filename.replace(',',' ')
@@ -58,7 +56,6 @@ def main(opts):
 
             output_filename = os.path.join(
                 feature_path_now, fileId+".npz")
-            print(output_filename)
             if not os.path.exists(output_filename):
                 fw.write(input_filename+","+output_filename+"\n")
 
