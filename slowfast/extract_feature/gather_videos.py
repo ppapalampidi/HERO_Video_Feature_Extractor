@@ -33,6 +33,7 @@ def main(opts):
             # if cnt > 3:
             #     break
         print(cnt)
+        print(movies)
         # movies = [x[0] for x in os.walk(videopath)][1:]
 
         for movie in movies:
