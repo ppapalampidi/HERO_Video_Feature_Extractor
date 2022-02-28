@@ -1,3 +1,4 @@
+import copy
 import os
 import argparse
 import json
@@ -31,7 +32,7 @@ def main(opts):
             movies.append(x[0])
             # if cnt > 3:
             #     break
-
+        print(cnt)
         # movies = [x[0] for x in os.walk(videopath)][1:]
 
         for movie in movies:
@@ -43,7 +44,7 @@ def main(opts):
                 glob.glob(os.path.join(movie, '*.mp4')))
             # fileList.extend(segs_list)
 
-            fileList = segs_list
+            fileList = copy.deepcopy(segs_list)
             if fileList == []:
                 continue
 
