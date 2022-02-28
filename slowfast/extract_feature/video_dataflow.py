@@ -69,7 +69,7 @@ class ReadVideo(object):
 
     def __call__(self, paths):
         video_path, output_file = paths[0], paths[1]
-        # print(paths)
+        print(video_path)
         load_flag = os.path.isfile(video_path)
         if not self.overwrite:
             load_flag = load_flag and not(os.path.isfile(output_file))
