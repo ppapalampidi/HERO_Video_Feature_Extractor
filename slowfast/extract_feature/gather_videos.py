@@ -38,11 +38,14 @@ def main(opts):
 
         partition_range = int(len(movies)/5)
 
+        print(partition_range)
+
         valid_nums = [partition_range*partition, (partition_range+1)*partition]
 
         if partition_range == 4:
             valid_nums[1] = len(movies)
 
+        print(valid_nums)
         # outputFile = f"{csv_folder}/summscreen_info.csv"
         outputFile = outputfiles[partition]
 
@@ -78,8 +81,10 @@ def main(opts):
 
                     output_filename = os.path.join(
                         feature_path_now, fileId+".npz")
-                    if not os.path.exists(output_filename):
-                        fw.write(input_filename+","+output_filename+"\n")
+                    # if not os.path.exists(output_filename):
+                    fw.write(input_filename+","+output_filename+"\n")
+                    # if not os.path.exists(output_filename):
+                    #     fw.write(input_filename+","+output_filename+"\n")
 
 
 if __name__ == '__main__':
