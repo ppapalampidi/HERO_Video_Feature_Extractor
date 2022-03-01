@@ -40,7 +40,7 @@ def main(opts):
 
         print(partition_range)
 
-        valid_nums = [partition_range*partition, (partition_range+1)*partition]
+        valid_nums = [partition_range*partition, (partition_range)*(partition+1)]
 
         if partition_range == 4:
             valid_nums[1] = len(movies)
@@ -82,9 +82,9 @@ def main(opts):
                     output_filename = os.path.join(
                         feature_path_now, fileId+".npz")
                     # if not os.path.exists(output_filename):
-                    fw.write(input_filename+","+output_filename+"\n")
-                    # if not os.path.exists(output_filename):
-                    #     fw.write(input_filename+","+output_filename+"\n")
+                    # fw.write(input_filename+","+output_filename+"\n")
+                    if not os.path.exists(output_filename):
+                        fw.write(input_filename+","+output_filename+"\n")
 
 
 if __name__ == '__main__':
