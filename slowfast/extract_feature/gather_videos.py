@@ -18,52 +18,68 @@ def main(opts):
     # if not os.path.exists(feature_path):
     #     os.mkdir(feature_path)
 
-    outputFile = f"{csv_folder}/summscreen_info.csv"
-    with open(outputFile, "w") as fw:
-        fw.write("video_path,feature_path\n")
-        fileList = []
+    partitions = 5
+    outputfiles = [f"{csv_folder}/summscreen_info_1.csv", f"{csv_folder}/summscreen_info_2.csv",
+                   f"{csv_folder}/summscreen_info_3.csv", f"{csv_folder}/summscreen_info_4.csv",
+                   f"{csv_folder}/summscreen_info_5.csv"]
 
-        movies = []
-        cnt = 0
-        for x in os.walk(videopath):
-            cnt += 1
-            if cnt == 1:
-                continue
-            movies.append(x[0])
-            # if cnt > 3:
-            #     break
-        print(cnt)
-        print(movies[:10])
-        # movies = [x[0] for x in os.walk(videopath)][1:]
+    movies = []
+    cnt = 0
+    for x in os.walk(videopath):
+        cnt += 1
+        if cnt == 1:
+            continue
+        movies.append(x[0])
+        # if cnt > 3:
+        #     break
+    print(cnt)
 
-        for movie in movies:
-            # movie_scenes = [x[0] for x in os.walk(movie)][1:]
-            # for movie_scene in movie_scenes:
-            #     segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
-            #     fileList.extend(segs_list)
-            segs_list = sorted(
-                glob.glob(os.path.join(movie, '*.mp4')))
-            # fileList.extend(segs_list)
+    for partition in range(partitions):
 
-            fileList = copy.deepcopy(segs_list)
-            if fileList == []:
-                continue
+        partition_range = int(len(movies)/5)
 
-            video_name = movie.split('/')[-1]
-            feature_path_now = os.path.join(feature_path, video_name)
+        valid_nums = [partition_range*partition, (partition_range+1)*partition]
 
-            # if not os.path.exists(feature_path_now):
-            #     os.mkdir(feature_path_now)
-            for input_filename in fileList:
-                # if ',' in input_filename:
-                    # input_filename = input_filename.replace(',',' ')
-                filename = os.path.basename(input_filename)
-                fileId, _ = os.path.splitext(filename)
+        if partition_range == 4:
+            valid_nums[1] = len(movies)
 
-                output_filename = os.path.join(
-                    feature_path_now, fileId+".npz")
-                if not os.path.exists(output_filename):
-                    fw.write(input_filename+","+output_filename+"\n")
+        # outputFile = f"{csv_folder}/summscreen_info.csv"
+        outputFile = outputfiles[partition]
+
+        with open(outputFile, "w") as fw:
+            fw.write("video_path,feature_path\n")
+            fileList = []
+            # movies = [x[0] for x in os.walk(videopath)][1:]
+            for z, movie in enumerate(movies):
+                if z < valid_nums[0] or z >= valid_nums[1]:
+                    continue
+                # movie_scenes = [x[0] for x in os.walk(movie)][1:]
+                # for movie_scene in movie_scenes:
+                #     segs_list = sorted(glob.glob(os.path.join(movie_scene, '*.mp4')))
+                #     fileList.extend(segs_list)
+                segs_list = sorted(
+                    glob.glob(os.path.join(movie, '*.mp4')))
+                # fileList.extend(segs_list)
+
+                fileList = copy.deepcopy(segs_list)
+                if fileList == []:
+                    continue
+
+                video_name = movie.split('/')[-1]
+                feature_path_now = os.path.join(feature_path, video_name)
+
+                # if not os.path.exists(feature_path_now):
+                #     os.mkdir(feature_path_now)
+                for input_filename in fileList:
+                    # if ',' in input_filename:
+                        # input_filename = input_filename.replace(',',' ')
+                    filename = os.path.basename(input_filename)
+                    fileId, _ = os.path.splitext(filename)
+
+                    output_filename = os.path.join(
+                        feature_path_now, fileId+".npz")
+                    if not os.path.exists(output_filename):
+                        fw.write(input_filename+","+output_filename+"\n")
 
 
 if __name__ == '__main__':
