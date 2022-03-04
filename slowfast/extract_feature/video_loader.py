@@ -62,6 +62,7 @@ class VideoLoader(Dataset):
 
     def __getitem__(self, idx):
         video_path = self.csv['video_path'].values[idx]
+        print(video_path)
         output_file = self.csv['feature_path'].values[idx]
         load_flag = os.path.isfile(video_path)
         if not self.overwrite:
