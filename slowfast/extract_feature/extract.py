@@ -134,6 +134,9 @@ def perform_test(test_loader, model, preprocess,
     total_time = 0
     pbar = tqdm(total=n_dataset)
     for _, data in enumerate(test_loader):
+        if data == {}:
+            print("problematic video file")
+            continue
         video = data['video']
         video_shape_len = len(video.shape)
         input_file = data['input']

@@ -62,7 +62,6 @@ class VideoLoader(Dataset):
 
     def __getitem__(self, idx):
         video_path = self.csv['video_path'].values[idx]
-        print(video_path)
         output_file = self.csv['feature_path'].values[idx]
         load_flag = os.path.isfile(video_path)
         if not self.overwrite:
@@ -88,10 +87,13 @@ class VideoLoader(Dataset):
                 x = int((width - self.size) / 2.0)
                 y = int((height - self.size) / 2.0)
                 cmd = cmd.crop(x, y, self.size, self.size)
-            out, _ = (
-                cmd.output('pipe:', format='rawvideo', pix_fmt=self.pix_fmt)
-                .run(capture_stdout=True, quiet=True)
-            )
+            try:
+                out, _ = (
+                    cmd.output('pipe:', format='rawvideo', pix_fmt=self.pix_fmt)
+                    .run(capture_stdout=True, quiet=True)
+                )
+            except:
+                return {}
             # 'rgb24'
             if self.centercrop and isinstance(self.size, int):
                 height, width = self.size, self.size
