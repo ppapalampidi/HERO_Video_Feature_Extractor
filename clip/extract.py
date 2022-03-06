@@ -60,6 +60,9 @@ model, _ = clip.load(args.model_version, device="cuda")
 totatl_num_frames = 0
 with th.no_grad():
     for k, data in enumerate(tqdm(loader)):
+        if data == {}:
+            print("problematic video file")
+            continue
         input_file = data['input'][0]
         output_file = data['output'][0]
         if args.model_version == "RN50x4":

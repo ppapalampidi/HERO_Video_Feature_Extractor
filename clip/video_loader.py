@@ -112,10 +112,14 @@ class VideoLoader(Dataset):
                 x = int((width - self.size) / 2.0)
                 y = int((height - self.size) / 2.0)
                 cmd = cmd.crop(x, y, self.size, self.size)
-            out, _ = (
-                cmd.output('pipe:', format='rawvideo', pix_fmt='rgb24')
-                .run(capture_stdout=True, quiet=True)
-            )
+
+            try:
+                out, _ = (
+                    cmd.output('pipe:', format='rawvideo', pix_fmt='rgb24')
+                    .run(capture_stdout=True, quiet=True)
+                )
+            except:
+                return {}
             if self.centercrop and isinstance(self.size, int):
                 height, width = self.size, self.size
             video = np.frombuffer(out, np.uint8).reshape(
