@@ -19,9 +19,9 @@ def main(opts):
     #     os.mkdir(feature_path)
 
     partitions = 5
-    outputfiles = [f"{csv_folder}/summscreen_info_1.csv", f"{csv_folder}/summscreen_info_2.csv",
-                   f"{csv_folder}/summscreen_info_3.csv", f"{csv_folder}/summscreen_info_4.csv",
-                   f"{csv_folder}/summscreen_info_5.csv"]
+    outputfiles = [f"{csv_folder}/summscreen_clip_info_1.csv", f"{csv_folder}/summscreen_clip_info_2.csv",
+                   f"{csv_folder}/summscreen_clip_info_3.csv", f"{csv_folder}/summscreen_clip_info_4.csv",
+                   f"{csv_folder}/summscreen_clip_info_5.csv"]
 
     movies = []
     cnt = 0
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     #                     type=str, help="output feature path.")
     parser.add_argument("--video_path", default="/home/s1837267/SummScreen_data/shots/", type=str,
                         help="The input video path.")
-    parser.add_argument("--feature_path", default="/home/s1837267/SummScreen_data/video_features/slowfast_features/",
+    parser.add_argument("--feature_path", default="/home/s1837267/SummScreen_data/video_features/clip_features/",
                         type=str, help="output feature path.")
     parser.add_argument(
         '--csv_folder', type=str, default="/home/s1837267/code/HERO_Video_Feature_Extractor/",
